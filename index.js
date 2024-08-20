@@ -1,5 +1,13 @@
 require("dotenv").config({ path: __dirname + "/.env" });
 const { twitterClient } = require("./twitterClient.js");
+const CronJob = require("cron").CronJob;
+const express = require("express");
+const app = express();
+const port = process.env.PORT || 4000;
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
 
 const tweet = async () => {
   try {
@@ -10,3 +18,10 @@ const tweet = async () => {
 };
 
 tweet();
+
+// example using cron to send every 30 seconds
+// const cronTweet = new CronJob("30 * * * * *", async () => {
+//   tweet();
+// });
+
+// cronTweet.start();
